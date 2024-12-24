@@ -1,2 +1,8 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
+<div class="login-page">
+    <h1>pikastore</h1>
+    <form class="auth-form">
+    <input placeholder="username" type="text" />
+    <input placeholder="password" type="password" />
+    <button>Register</button>
+    </form>
+</div>
