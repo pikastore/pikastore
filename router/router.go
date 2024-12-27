@@ -10,7 +10,6 @@ type Route struct {
 	params []string
 }
 
-// Settings holds router-specific configurations like middlewares and SSL settings
 type Settings struct {
 	middlewares []gin.HandlerFunc
 	SSL         bool

@@ -23,7 +23,7 @@
         aria-label={label}
         aria-current={currentPath === path ? 'page' : undefined}
         on:click={() => goto(path)}>
-        <Icon icon={icon} />
+        <Icon icon={icon} height="20" width="20" />
       </button>
     {/each}
   </div>
