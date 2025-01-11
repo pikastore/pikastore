@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"github.com/pikastore/pikastore/api"
 	"github.com/spf13/cobra"
 )
 
@@ -18,10 +17,9 @@ func ServeCmd() *cobra.Command {
 			} else if addr == "" {
 				addr = "0.0.0.0:4173"
 			}
-			api.Serve(addr)
+
 		},
 	}
-
 	cmd.PersistentFlags().StringVar(
 		&addr,
 		"port",
