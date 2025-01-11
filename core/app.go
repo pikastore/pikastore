@@ -22,12 +22,13 @@ type Config struct {
 	DbCon string
 }
 
-//Defaults
+// Defaults
 const (
 	DefaultData  string = "/ps_data"
 	DefaultDbcon string = "/ps_db"
 )
-//Creats the App
+
+// Creates the App
 func NewApp(config Config) *Config {
 	if config.DbCon == "" {
 		config.DbCon = DefaultDbcon
@@ -41,7 +42,7 @@ func NewApp(config Config) *Config {
 	}
 }
 
-//Logger
+// Logger
 func Format(message, color string) {
 	_, file, line, ok := runtime.Caller(2)
 
