@@ -43,6 +43,7 @@ func CreateAPP() *Pikastore {
 		DbCon: DefaultDatabase,
 	})
 	ps.rootCmd.AddCommand(cmd.ServeCmd())
+	ps.rootCmd.AddCommand(cmd.UpdateCmd())
 
 	return ps
 }
