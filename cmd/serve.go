@@ -19,17 +19,18 @@ func ServeCmd() *cobra.Command {
 		Short:        "Starts the HTTP server",
 		SilenceUsage: true,
 		Run: func(cmd *cobra.Command, args []string) {
-			if len(args) > 0 && addr == "" {
-				if addr == "" {
-					addr = "0.0.0.0:80"
-				}
+			if useSSL {
 				if httpsaddr == "" {
 					httpsaddr = "0.0.0.0:443"
 				}
 			} else {
 				if addr == "" {
-					addr = "127.0.0.1:8090"
+					addr = "0.0.0.0:80"
 				}
+			}
+
+			if addr == "" {
+				addr = "127.0.0.1:8090"
 			}
 
 			err := core.Serve(core.ServeConfig{
@@ -51,9 +52,15 @@ func ServeCmd() *cobra.Command {
 	}
 	cmd.PersistentFlags().StringVar(
 		&addr,
-		"port",
+		"http",
 		"",
-		"Specify the port for the HTTP server. Defaults to 0.0.0.0:8090 unless overridden.",
+		"Specify the address for the HTTP server Defaults to 0.0.0.0:80 (127.0.0.1:8090) unless overridden.",
+	)
+	cmd.PersistentFlags().StringVar(
+		&httpsaddr,
+		"https",
+		"",
+		"Specify the address for the HTTP server Defaults to 0.0.0.0:443 unless overridden.",
 	)
 	cmd.PersistentFlags().BoolVar(
 		&useSSL,
