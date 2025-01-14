@@ -24,7 +24,7 @@ func ServeCmd() *cobra.Command {
 					addr = "0.0.0.0:80"
 				}
 				if httpsaddr == "" {
-					httpsaddr = "0.0.0.0:80"
+					httpsaddr = "0.0.0.0:443"
 				}
 			} else {
 				if addr == "" {
