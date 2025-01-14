@@ -3,6 +3,8 @@ package core
 import (
 	"fmt"
 	"net/http"
+
+	"github.com/pikastore/pikastore/router"
 )
 
 type ServeConfig struct {
@@ -20,15 +22,15 @@ type ServeConfig struct {
 Serves the http server
 
 	err := core.Serve(core.ServeConfig{
-		HttpAddr:        addr,
-		HttpsAddr:       addr,
+		HttpAddr:        "0.0.0.0:80",
+		HttpsAddr:       "0.0.0.0:443",
 		SSL: 			 false,
-		ShowStartBanner: false,
+		ShowStartBanner: true,
 	})
 */
 func Serve(config ServeConfig) error {
-	//where all the server magic happens
-	//
+	//Start server
+	server := router.New()
 	var baseURL string
 	if config.SSL {
 		baseURL = "https://" + config.HttpsAddr
@@ -41,8 +43,8 @@ func Serve(config ServeConfig) error {
 	}
 
 	if config.SSL {
-	return http.ListenAndServeTLS(config.HttpsAddr, "", "", nil)
+		return http.ListenAndServeTLS(config.HttpsAddr, "", "", server)
 	} else {
-	return http.ListenAndServe(config.HttpAddr, nil)
+		return http.ListenAndServe(config.HttpAddr, server)
 	}
 }
