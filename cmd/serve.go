@@ -12,6 +12,7 @@ import (
 func ServeCmd() *cobra.Command {
 	var addr string
 	var httpsaddr string
+	var useSSL bool
 	cmd := &cobra.Command{
 		Use:          "serve",
 		Args:         cobra.ArbitraryArgs,
@@ -34,7 +35,7 @@ func ServeCmd() *cobra.Command {
 			err := core.Serve(core.ServeConfig{
 				HttpAddr:        addr,
 				HttpsAddr:       httpsaddr,
-				SSL:             false,
+				SSL:             useSSL,
 				ShowStartBanner: true,
 			})
 
@@ -52,7 +53,13 @@ func ServeCmd() *cobra.Command {
 		&addr,
 		"port",
 		"",
-		"Specify the port for the HTTP server. Defaults to 0.0.0.0:4173 unless overridden.",
+		"Specify the port for the HTTP server. Defaults to 0.0.0.0:8090 unless overridden.",
+	)
+	cmd.PersistentFlags().BoolVar(
+		&useSSL,
+		"ssl",
+		false,
+		"Enables SSL on the server.",
 	)
 
 	return cmd

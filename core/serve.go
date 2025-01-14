@@ -1,6 +1,9 @@
 package core
 
-import "fmt"
+import (
+	"fmt"
+	"net/http"
+)
 
 type ServeConfig struct {
 	//bools
@@ -36,5 +39,10 @@ func Serve(config ServeConfig) error {
 		fmt.Printf("REST API started at %s/api/\n", baseURL)
 		fmt.Printf("Web Console started at %s\n", baseURL)
 	}
-	return nil
+
+	if config.SSL {
+	return http.ListenAndServeTLS(config.HttpsAddr, "", "", nil)
+	} else {
+	return http.ListenAndServe(config.HttpAddr, nil)
+	}
 }

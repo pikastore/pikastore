@@ -1,5 +1,3 @@
 package router
 
-func NewRouter() {
-	
-}
+//not sure what to put here...
