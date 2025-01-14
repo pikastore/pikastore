@@ -14,7 +14,9 @@ type Router struct {
 }
 
 func New() *Router {
-	return &Router{}
+	return &Router{
+		routes: make(map[string]map[string]http.Handler),
+	}
 }
 func (r *Router) recv(w http.ResponseWriter, req *http.Request) {
 	if rcv := recover(); rcv != nil {
