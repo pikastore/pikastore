@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/pikastore/pikastore/api"
 	"github.com/pikastore/pikastore/router"
 )
 
@@ -19,7 +20,7 @@ type ServeConfig struct {
 }
 
 /*
-Serves the http server
+Serves the http sersver
 
 	err := core.Serve(core.ServeConfig{
 		HttpAddr:        "0.0.0.0:80",
@@ -30,7 +31,12 @@ Serves the http server
 */
 func Serve(config ServeConfig) error {
 	//Start server
-	server := router.New()
+	router := router.New()
+
+	//routes (I should move this to another file)
+	rg := router.Group("/api")
+	api.RegisterAuth(rg)
+
 	var baseURL string
 	if config.SSL {
 		baseURL = "https://" + config.HttpsAddr
@@ -41,10 +47,9 @@ func Serve(config ServeConfig) error {
 		fmt.Printf("REST API started at %s/api/\n", baseURL)
 		fmt.Printf("Web Console started at %s\n", baseURL)
 	}
-
 	if config.SSL {
-		return http.ListenAndServeTLS(config.HttpsAddr, "", "", server)
+		return http.ListenAndServeTLS(config.HttpsAddr, "", "", router)
 	} else {
-		return http.ListenAndServe(config.HttpAddr, server)
+		return http.ListenAndServe(config.HttpAddr, router)
 	}
 }

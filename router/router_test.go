@@ -11,7 +11,7 @@ import (
 func TestRouter(t *testing.T) {
 	router := router.New()
 
-	router.GET("/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	router.Get("/api", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
 		fmt.Fprintln(w, `{"message": "Hello, World!"}`)
