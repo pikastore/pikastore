@@ -1,3 +1,0 @@
-<div class="app-body">
-    <h1>Logs</h1>
-</div>

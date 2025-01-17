@@ -10,7 +10,7 @@
     </p>
     <p align="center">
     <h1>Pikastore</h1>
-    <p>(WIP)</p>
+    <p>S3 Compatible Object Storage Solution</p>
 </p>
 </div>
 

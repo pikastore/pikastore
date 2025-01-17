@@ -1,0 +1,6 @@
+[workspace]
+members = [
+    "src/apis",
+    "src/core",
+    "src/services",
+]
