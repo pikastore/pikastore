@@ -1,11 +1,10 @@
 package core
 
 import (
-	"fmt"
 	"log"
 	"os"
-	"runtime"
-	"time"
+
+	"github.com/pikastore/pikastore/core/tools"
 )
 
 // Defines the version whatnot
@@ -18,8 +17,8 @@ var app = App{
 }
 
 type Config struct {
-	Data  string
-	DbCon string
+	DataDir string
+	DbDir   string
 }
 
 // Defaults
@@ -30,43 +29,29 @@ const (
 
 // Creates the App
 func NewApp(config Config) *Config {
-	if config.DbCon == "" {
-		config.DbCon = DefaultDbcon
+	if config.DbDir == "" {
+		config.DbDir = DefaultDbcon
 	}
-	if config.Data == "" {
-		config.Data = DefaultData
+	if config.DataDir == "" {
+		config.DataDir = DefaultData
 	}
 	return &Config{
-		Data:  config.Data,
-		DbCon: config.DbCon,
+		DataDir: config.DataDir,
+		DbDir:   config.DbDir,
 	}
 }
 
-// Logger
-func Format(message, color string) {
-	_, file, line, ok := runtime.Caller(2)
+func Bootstrap(config Config) {
+	ensureDir(config.DbDir)
+	db := tools.GetDB()
+	db.AutoMigrate(
+		&tools.User{},
+		&tools.Bucket{},
+		&tools.Settings{},
+	)
 
-	if !ok {
-		log.Fatalln("Unable to get caller")
-	}
-	cwd, err := os.Getwd()
-
-	if err != nil {
-		log.Fatalln("Unable to get cwd")
-	}
-
-	fmt.Printf("%s%s\033[0m |  \033[38;5;177m%s:%d \033[0m| \033[0m%s\n", color, time.Now().Format("15:04:05"), file[len(cwd)+1:], line, message)
+	log.Println("Database initialized and migrations applied successfully!")
 }
-
-func Log(input string) {
-	Format(input, "\033[38;2;30;215;96m")
-}
-func Warn(input string) {
-	Format(input, "\033[38;2;255;215;95m")
-}
-func Error(input string, panic bool) {
-	Format(input, "\033[38;2;219;60;66m")
-	if panic {
-		os.Exit(0)
-	}
+func ensureDir(path string) error {
+	return os.MkdirAll(path, os.ModePerm)
 }

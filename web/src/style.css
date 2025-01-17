@@ -2,11 +2,14 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #070707;
+  background-color: #0C0B0D;
   color: #e8f3fc;
   font-family: 'Poppins', sans-serif;
 }
 
+.text-login-page {
+  color: #A64ACA;
+}
 
 .login-page{
     display: flex;

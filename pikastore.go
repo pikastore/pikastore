@@ -19,17 +19,19 @@ func New() *Pikastore {
 	return CreateAPP()
 }
 
-type Config struct {
-	Data  string
-	DbCon string
-}
-
 // Creates the App
 func CreateAPP() *Pikastore {
 	baseDir, _ := inspectRuntime()
-	var DefaultData = filepath.Join(baseDir, "ps_data")
-	var DefaultDatabase = filepath.Join(baseDir, "ps_db")
+	defaultData := filepath.Join(baseDir, "ps_data/")
+	defaultDatabase := filepath.Join(baseDir, "ps_db/")
+
+	config := core.Config{
+		DataDir: defaultData,
+		DbDir:   defaultDatabase,
+	}
+
 	ps := &Pikastore{
+		Config: config,
 		rootCmd: &cobra.Command{
 			Use:   "pikastore",
 			Short: "pikastore CLI",
@@ -38,12 +40,18 @@ func CreateAPP() *Pikastore {
 			},
 		},
 	}
-	core.NewApp(core.Config{
-		Data:  DefaultData,
-		DbCon: DefaultDatabase,
-	})
+
 	ps.rootCmd.AddCommand(cmd.ServeCmd())
 	ps.rootCmd.AddCommand(cmd.UpdateCmd())
+
+	if _, err := os.Stat(config.DataDir); os.IsNotExist(err) {
+		os.Mkdir(config.DataDir, 0755)
+	}
+	if _, err := os.Stat(config.DbDir); os.IsNotExist(err) {
+		os.Mkdir(config.DbDir, 0755)
+	}
+
+	core.Bootstrap(config)
 
 	return ps
 }
@@ -51,6 +59,7 @@ func CreateAPP() *Pikastore {
 func (ps *Pikastore) Start() error {
 	return ps.rootCmd.Execute()
 }
+
 
 func inspectRuntime() (baseDir string, withGoRun bool) {
 	if strings.HasPrefix(os.Args[0], os.TempDir()) {

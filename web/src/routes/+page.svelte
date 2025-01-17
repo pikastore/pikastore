@@ -1,5 +1,5 @@
 <div class="login-page">
-    <h1>pikastore</h1>
+    <h1 class="text-login-page">pikastore</h1>
     <form class="auth-form">
     <input placeholder="username" type="text" />
     <input placeholder="password" type="password" />
