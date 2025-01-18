@@ -1,6 +1,10 @@
 [workspace]
+resolver = "2"
 members = [
     "src/apis",
     "src/core",
     "src/services",
 ]
+
+[workspace.dependencies]
+rocket = "0.5.1"
