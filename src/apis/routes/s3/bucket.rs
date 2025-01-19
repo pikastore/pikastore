@@ -1,6 +1,11 @@
-use rocket::get;
+use rocket::{get, post};
 
 #[get("/")]
 pub async fn list_buckets() -> &'static str {
-    "List of buckets"
+    ""
+}
+
+#[post("/")]
+pub async fn create_bucket() -> &'static str {
+    ""
 }
