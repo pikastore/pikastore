@@ -1,7 +1,7 @@
 use rocket::{routes, Build, Rocket};
 
-mod hw;
+mod s3;
 
 pub fn mount(rocket: Rocket<Build>) -> Rocket<Build> {
-    rocket.mount("/hello", routes![hw::hello_world])
+    rocket.mount("/v1/bucket", routes![s3::bucket::list_buckets])
 }

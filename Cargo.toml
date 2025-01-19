@@ -2,9 +2,13 @@
 resolver = "2"
 members = [
     "src/apis",
-    "src/core",
+    "src/pikastore",
     "src/services",
 ]
 
+default-members = ["src/pikastore"]
+
 [workspace.dependencies]
+apis = { version = "*", path = "src/apis"}
 rocket = "0.5.1"
+clap = "4.5.26"

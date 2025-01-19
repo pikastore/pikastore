@@ -1,0 +1,9 @@
+[package]
+name = "pikastore"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+apis = { workspace = true }
+rocket = { workspace = true, default-features = false, version = "0.5.1", features = ["json"]}
+clap = { workspace = true, features = ["derive"]}
