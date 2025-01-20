@@ -5,3 +5,9 @@ edition = "2021"
 
 [lib]
 path = "lib.rs"
+
+[dependencies]
+sha256.workspace = true
+rand.workspace = true
+hex.workspace = true
+sha1.workspace = true

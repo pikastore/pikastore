@@ -10,5 +10,10 @@ default-members = ["src/pikastore"]
 
 [workspace.dependencies]
 apis = { version = "*", path = "src/apis"}
+services = { version = "*", path = "src/services"}
+sha1 = "0.10.6"
+sha256 = "1.5.0"
+hex = "0.4.3"
 rocket = "0.5.1"
 clap = "4.5.26"
+rand = "0.8.5"

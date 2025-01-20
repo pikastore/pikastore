@@ -5,5 +5,6 @@ edition = "2021"
 
 [dependencies]
 apis = { workspace = true }
+services = { workspace = true }
 rocket = { workspace = true, default-features = false, version = "0.5.1", features = ["json"]}
 clap = { workspace = true, features = ["derive"]}
