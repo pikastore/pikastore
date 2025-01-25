@@ -5,7 +5,6 @@
     create bucket additional args: -name <String> )
 */
 use clap::{Parser, Subcommand};
-use rocket::{tokio, Config};
 use apis::server::server;
 use services::cmd::secrets;
 #[derive(Parser, Debug)]
@@ -37,12 +36,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     match &args.command {
         Commands::Serve { host, port } => {
-            let config = Config {
-                address: host.parse()?,
-                port: *port, 
-                ..Config::default()
-            };
-            server(config).await.launch().await?;
+            server(host.to_string(), *port).await;
         }
         Commands::Secrets { generate } => {
             if *generate {

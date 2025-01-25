@@ -5,4 +5,5 @@ edition = "2021"
 [lib]
 path = "lib.rs"
 [dependencies]
-rocket = { workspace = true,  version = "0.5.1", features = ["json"]}
+axum.workspace = true
+tokio.workspace =true
