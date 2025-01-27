@@ -11,3 +11,4 @@ sha256.workspace = true
 rand.workspace = true
 hex.workspace = true
 sha1.workspace = true
+rusqlite.workspace = true

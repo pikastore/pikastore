@@ -6,7 +6,7 @@
 */
 use clap::{Parser, Subcommand};
 use apis::server::server;
-use services::cmd::secrets;
+use services::{cmd::secrets, database::db};
 #[derive(Parser, Debug)]
 #[command(version, about, long_about = None)]
 pub struct Args {
@@ -32,8 +32,8 @@ pub enum Commands {
 }
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    db::open_db("/");
     let args = Args::parse();
-
     match &args.command {
         Commands::Serve { host, port } => {
             server(host.to_string(), *port).await;
