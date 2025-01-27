@@ -1,11 +1,15 @@
-use services::database;
 struct Server {
-    ServerName: String,
-    KeyID: String,
-    AccessKey: String, 
-    Region: String
+  pub  ServerName: String,
+  pub   KeyID: String,
+  pub   AccessKey: String, 
+  pub   Region: String
 }
 
 struct Bucket {
-    BucketName: String,
+  pub  BucketName: String,
+  pub CreatedAt: std::time::SystemTime,
+}
+
+struct Object {
+
 }
