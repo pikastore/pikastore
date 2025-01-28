@@ -15,8 +15,10 @@ sha1 = "0.10.6"
 sha256 = "1.5.0"
 hex = "0.4.3"
 clap = "4.5.26"
-rand = "0.8.5"
+rand = "0.9.0"
 axum = "0.8.1"
 tokio = { version = "1.43.0", features = ["full"] }
+serde = { version = "1.0.217", features = ["derive"] }
 serde_json = "1.0.137"
 rusqlite = { version = "0.33.0", features = ["bundled"] }
+quick-xml = { version = "0.37.2", features = ["full"]}

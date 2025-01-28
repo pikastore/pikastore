@@ -32,7 +32,6 @@ pub enum Commands {
 }
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    db::open_db("/");
     let args = Args::parse();
     match &args.command {
         Commands::Serve { host, port } => {

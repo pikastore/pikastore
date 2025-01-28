@@ -12,3 +12,6 @@ rand.workspace = true
 hex.workspace = true
 sha1.workspace = true
 rusqlite.workspace = true
+serde.workspace = true
+quick-xml.workspace = true
+axum.workspace =true
