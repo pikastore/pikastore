@@ -21,4 +21,4 @@ tokio = { version = "1.43.0", features = ["full"] }
 serde = { version = "1.0.217", features = ["derive"] }
 serde_json = "1.0.137"
 rusqlite = { version = "0.33.0", features = ["bundled"] }
-quick-xml = { version = "0.37.2", features = ["full"]}
+quick-xml = { version = "0.37.2", features = ["serialize"]}

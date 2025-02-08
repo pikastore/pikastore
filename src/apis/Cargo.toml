@@ -8,3 +8,5 @@ path = "lib.rs"
 axum.workspace = true
 tokio.workspace = true
 serde_json.workspace = true
+services = { workspace = true }
+serde = { workspace = true }
